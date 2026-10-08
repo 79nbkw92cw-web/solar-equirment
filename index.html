@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Inventory Management</title>
+    <style> 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #17351f;
+}
+
+.page {
+    min-height: 100vh;
+}
+
+/* ---------------- LOGIN ---------------- */
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        url("images/login.jpg")
+        center/cover no-repeat;
+
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 30, 15, 0.55);
+}
+
+.login-card {
+    position: relative;
+    width: 400px;
+    padding: 40px;
+
+    background: rgba(255,255,255,0.95);
+
+    border-radius: 20px;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+}
+
+.login-card h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.login-card p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #6d806f;
+}
+
+label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+
+    border: 1px solid #b8c7ba;
+    border-radius: 8px;
+
+    font-size: 15px;
+}
+
+button {
+    border: none;
+    padding: 13px 22px;
+
+    border-radius: 8px;
+
+    background: #178b4b;
+    color: white;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #106b38;
+}
+
+.login-card button {
+    width: 100%;
+    margin-top: 22px;
+}
+
+.forgot {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #178b4b;
+}
+
+
+/* ---------------- DASHBOARD ---------------- */
+
+.dashboard-page {
+    display: flex;
+
+    background:
+        linear-gradient(
+            rgba(245,250,245,.93),
+            rgba(245,250,245,.93)
+        ),
+        url("images/dashboard.jpg")
+        center/cover fixed;
+}
+
+.sidebar {
+    width: 230px;
+    min-height: 100vh;
+
+    background: rgba(17,57,34,.95);
+
+    padding: 25px 15px;
+
+    color: white;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.sidebar button {
+    width: 100%;
+    margin-bottom: 10px;
+
+    background: transparent;
+    text-align: left;
+}
+
+.sidebar button:hover {
+    background: rgba(255,255,255,.15);
+}
+
+.sidebar-bottom {
+    margin-top: 40vh;
+}
+
+.sidebar .logout {
+    background: #c92b2b;
+}
+
+.content {
+    flex: 1;
+    padding: 50px;
+}
+
+.content h1 {
+    margin-bottom: 35px;
+}
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,.9);
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.08);
+
+    border-left: 5px solid #3ca967;
+}
+
+.stat-card span {
+    font-size: 25px;
+}
+
+.stat-card h3 {
+    margin: 12px 0;
+}
+
+.stat-card strong {
+    font-size: 28px;
+}
+
+.warning {
+    border-left-color: #e7a72c;
+}
+
+.danger {
+    border-left-color: #d84848;
+}
+
+.history {
+    margin-top: 40px;
+
+    background: rgba(255,255,255,.9);
+
+    padding: 25px;
+
+    border-radius: 15px;
+}
+
+.history p {
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.history span {
+    float: right;
+}
+
+
+/* ---------------- FORMS ---------------- */
+
+.inner-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+
+    background:
+        linear-gradient(
+            rgba(240,248,241,.88),
+            rgba(240,248,241,.88)
+        ),
+        url("images/equipment.jpg")
+        center/cover fixed;
+}
+
+.form-container,
+.report-container {
+    width: 650px;
+
+    background: rgba(255,255,255,.95);
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,.15);
+}
+
+.form-container h1,
+.report-container h1 {
+    margin-bottom: 25px;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+}
+
+.row > div {
+    flex: 1;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 30px;
+}
+
+.cancel {
+    background: #e6b2b2;
+    color: #7b2222;
+}
+
+
+/* ---------------- REPORT ---------------- */
+
+.reports-page {
+    background:
+        linear-gradient(
+            rgba(232,244,235,.9),
+            rgba(232,244,235,.9)
+        ),
+        url("images/reports.jpg")
+        center/cover fixed;
+}
+
+.report-result {
+    margin-top: 35px;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    background: #f2f8f3;
+}
+
+.report-result p {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 8px 0;
+}
+
+.report-result button {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none;
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <section id="loginPage" class="page login-page">
+
+        <div class="overlay"></div>
+
+        <div class="login-card">
+            <h1>Solar Inventory</h1>
+            <p>Inventory Management System</p>
+
+            <form id="loginForm">
+
+                <label>Username</label>
+                <input type="text" id="username"
+                       placeholder="Enter username" required>
+
+                <label>Password</label>
+                <input type="password" id="password"
+                       placeholder="Enter password" required>
+
+                <button type="submit">Login</button>
+
+                <a href="#" class="forgot">
+                    Forgot username?
+                </a>
+
+            </form>
+        </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+    <section id="dashboardPage" class="page dashboard-page hidden">
+
+        <aside class="sidebar">
+
+            <h2>☀ Solar</h2>
+
+            <button onclick="showPage('dashboardPage')">
+                Dashboard
+            </button>
+
+            <button onclick="showPage('equipmentPage')">
+                Equipment
+            </button>
+
+            <button onclick="showPage('addPage')">
+                Add Product
+            </button>
+
+            <button onclick="showPage('reportsPage')">
+                Reports
+            </button>
+
+            <button>
+                Alerts
+            </button>
+
+            <div class="sidebar-bottom">
+                <button onclick="logout()" class="logout">
+                    Log out
+                </button>
+            </div>
+
+        </aside>
+
+
+        <main class="content">
+
+            <h1>Inventory Dashboard</h1>
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <span>☀</span>
+                    <h3>Solar Panels</h3>
+                    <strong>246</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>⚡</span>
+                    <h3>Inverters</h3>
+                    <strong>281</strong>
+                </div>
+
+                <div class="stat-card warning">
+                    <span>⚠</span>
+                    <h3>Low Stock</h3>
+                    <strong>13</strong>
+                </div>
+
+                <div class="stat-card danger">
+                    <span>!</span>
+                    <h3>Out of Stock</h3>
+                    <strong>2</strong>
+                </div>
+
+            </div>
+
+
+            <div class="history">
+
+                <h2>Recent Inventory History</h2>
+
+                <p>
+                    <b>Product added:</b>
+                    Solar Panel 450W
+                    <span>10:30</span>
+                </p>
+
+                <p>
+                    <b>Stock updated:</b>
+                    Inverter
+                    <span>11:15</span>
+                </p>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- ADD EQUIPMENT -->
+    <section id="addPage" class="page inner-page hidden">
+
+        <div class="form-container">
+
+            <h1>Add Solar Equipment</h1>
+
+            <label>Equipment name</label>
+            <input type="text"
+                   id="equipmentName"
+                   placeholder="Search">
+
+            <label>Equipment type</label>
+
+            <select id="equipmentType">
+                <option>Solar Panels</option>
+                <option>Inverters</option>
+                <option>Batteries</option>
+                <option>Accessories</option>
+            </select>
+
+            <label>Brand</label>
+            <input type="text"
+                   placeholder="Search">
+
+            <label>Model number</label>
+            <input type="text"
+                   placeholder="Search">
+
+            <div class="row">
+
+                <div>
+                    <label>Quantity</label>
+                    <input type="number" min="1">
+                </div>
+
+                <div>
+                    <label>Unit price</label>
+                    <input type="number" min="0">
+                </div>
+
+            </div>
+
+            <div class="form-buttons">
+
+                <button class="cancel"
+                        onclick="showPage('dashboardPage')">
+                    Cancel
+                </button>
+
+                <button onclick="addEquipment()">
+                    Add Equipment
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REPORTS -->
+    <section id="reportsPage" class="page inner-page reports-page hidden">
+
+        <div class="report-container">
+
+            <h1>Inventory Reports</h1>
+
+            <label>Report type</label>
+
+            <select>
+                <option>Stock Summary</option>
+                <option>Low Stock Report</option>
+                <option>Out-of-Stock Report</option>
+            </select>
+
+            <div class="row">
+
+                <div>
+                    <label>Date added</label>
+                    <input type="date">
+                </div>
+
+                <div>
+                    <label>To</label>
+                    <input type="date">
+                </div>
+
+            </div>
+
+            <button onclick="generateReport()">
+                Generate Report
+            </button>
+
+
+            <div class="report-result">
+
+                <h2>Solar Equipment Summary</h2>
+
+                <p>Solar Panels <strong>54</strong></p>
+                <p>Inverters <strong>45</strong></p>
+                <p>Batteries <strong>22</strong></p>
+                <p>Accessories <strong>67</strong></p>
+
+                <hr>
+
+                <p>
+                    Low-stock items
+                    <strong>11</strong>
+                </p>
+
+                <p>
+                    Out-of-stock items
+                    <strong>3</strong>
+                </p>
+
+                <button>Export</button>
+                <button>Print</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script> 
+        function showPage(pageId) {
+
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(page => {
+        page.classList.add("hidden");
+    });
+
+    document.getElementById(pageId)
+            .classList.remove("hidden");
+}
+
+
+// LOGIN
+document.getElementById("loginForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const username =
+            document.getElementById("username").value;
+
+        const password =
+            document.getElementById("password").value;
+
+        if (username && password) {
+
+            showPage("dashboardPage");
+
+        } else {
+
+            alert("Please enter your username and password.");
+        }
+    });
+
+
+// LOGOUT
+function logout() {
+
+    showPage("loginPage");
+
+    document.getElementById("loginForm").reset();
+}
+
+
+// ADD EQUIPMENT
+function addEquipment() {
+
+    const name =
+        document.getElementById("equipmentName").value;
+
+    if (!name) {
+
+        alert("Please enter the equipment name.");
+
+        return;
+    }
+
+    alert(
+        "Equipment added successfully!"
+    );
+
+    showPage("dashboardPage");
+}
+
+
+// GENERATE REPORT
+function generateReport() {
+
+    alert(
+        "Inventory report generated successfully!"
+    );
+}
+    </script>
+
+</body>
+</html>
